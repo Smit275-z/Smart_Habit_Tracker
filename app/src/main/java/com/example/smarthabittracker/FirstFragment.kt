@@ -1,44 +1,35 @@
 package com.example.smarthabittracker
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.smarthabittracker.databinding.FragmentFirstBinding
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var adapter: HabitAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_first, container, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewHabits)
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
+        adapter = HabitAdapter()
+        recyclerView.adapter = adapter
 
-    }
+        // Sample data
+        val habits = listOf(
+            Habit("Exercise", "30 mins daily", "7:00 AM"),
+            Habit("Meditate", "10 mins daily", "8:00 AM"),
+            Habit("Read Book", "20 pages", "9:00 PM")
+        )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        adapter.submitList(habits)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return view
     }
 }
