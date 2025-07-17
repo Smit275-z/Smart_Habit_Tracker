@@ -14,7 +14,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_AddHabitFragment"
+            app:destination="@id/AddHabitFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.smarthabittracker.SecondFragment"
@@ -25,4 +30,10 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/AddHabitFragment"
+        android:name="com.example.smarthabittracker.AddHabitFragment"
+        android:label="Add Habit"
+        tools:layout="@layout/fragment_add_habit" />
 </navigation>
